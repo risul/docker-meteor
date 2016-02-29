@@ -6,9 +6,10 @@ RUN apt-get update
 
 # Install git, curl
 RUN apt-get update && \
-   apt-get install -y git curl && \
+   apt-get install -y git curl python python-pip && \
    (curl https://deb.nodesource.com/setup | sh) && \
    apt-get install -y nodejs && \
+   pip install awscli && \
    apt-get clean && \
    rm -Rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 

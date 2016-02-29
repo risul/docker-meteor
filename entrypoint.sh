@@ -106,6 +106,13 @@ if [ -n "${METEOR_DIR}" ]; then
    set -e
 fi
 
+# If we were given a S3_BUNDLE_URL, install awscli and download the bundle
+if [ -n "${S3_KEY}" ]; then  
+   echo "Downloading Application bundle from ${S3_BUNDLE_URL}..."
+   aws s3api get-object --bucket ${S3_BUCKET} --key ${S3_KEY} /tmp/bundle.tgz
+   tar xf /tmp/bundle.tgz -C ${APP_DIR}
+fi
+
 # If we were given a BUNDLE_URL, download the bundle
 # from there.
 if [ -n "${BUNDLE_URL}" ]; then
